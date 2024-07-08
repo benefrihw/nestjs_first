@@ -28,11 +28,4 @@ export class BookController {
     @Param('userId') userId: number) {
       return await this.bookService.getMyBooks(userId);
     }
-
-  // @Delete(':userId/:bookId')
-  // async deleteBook(
-  //   @Param('userId') userId: number,
-  //   @Param('bookId') showId: number) {
-  //   return await this.bookService.cancelBook(userId, showId);
-  //   }
 }

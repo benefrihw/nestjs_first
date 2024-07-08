@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { Repository } from 'typeorm';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Book } from './entities/book.entity';
@@ -50,25 +50,6 @@ export class BookService {
     }))
 
     myBookedShows.sort((a, b) => Number(a.date) - Number(b.date))
-    return myBookedShows;
+    return ({ message: "예매 목록 조회가 완료되었습니다.", myBookedShows});
   }
-
-
-  // async cancelBook(userId: number, bookId: number) {
-  //   // await this.verifyMessage(userId, bookId);
-  //   await this.bookRepository.delete({ bookId });
-  // }
-
-  // private async verifyMessage(userId: number, bookId: number) {
-  //   const book = await this.bookRepository.findOneBy({
-  //     userId,
-  //     bookId
-  //   });
-
-  //   if (_.isNil(book) || book.user_id !== userId) {
-  //     throw new NotFoundException(
-  //       '메시지를 찾을 수 없거나 수정/삭제할 권한이 없습니다.',
-  //     );
-  //   }
-  // }
 }
