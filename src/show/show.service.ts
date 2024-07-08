@@ -42,7 +42,7 @@ export class ShowService {
     image: string,
     date: string,
     time: string,
-    seat: number
+    seat: number,
   ) {
     // 제목 및 시간 중복 확인
     const existingShow = await this.findByTitleAndTime(title, date, time);
