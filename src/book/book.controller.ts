@@ -9,7 +9,7 @@ import { BookDto } from './dto/book.dto';
 import { BookService } from './book.service';
 
 @UseGuards(RolesGuard)
-@Controller('book')
+@Controller('books')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
 

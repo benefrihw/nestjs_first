@@ -4,7 +4,8 @@ import { Role } from 'src/user/types/userRole.type';
 
 import {
   Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Query,
-  BadRequestException
+  BadRequestException,
+  Patch
 } from '@nestjs/common';
 
 import { UpdateShowDto } from './dto/update-show.dto';
@@ -12,7 +13,7 @@ import { ShowService } from './show.service';
 import { createShowDto } from './dto/create-show.dto';
 
 @UseGuards(RolesGuard)
-@Controller('show')
+@Controller('shows')
 export class ShowController {
   constructor(private readonly showService: ShowService) {}
 
@@ -55,7 +56,7 @@ export class ShowController {
 
   // 공연 수정
   @Roles(Role.Admin)
-  @Put(':id')
+  @Patch(':id')
   async update(@Param('id') id: number, @Body() updateShowDto: UpdateShowDto) {
     const updatedShow = await this.showService.update(id, updateShowDto);
     return ({ message: "공연 수정이 완료되었습니다.", updatedShow })

@@ -59,14 +59,16 @@ export class UserService {
     
     // DB에 저장하기
     const saveUser = await this.userRepository.save(newUser);
-    return {
+    return ({ message: "회원가입에 성공했습니다",
       id: saveUser.id,
       email: saveUser.email,
       nickname: saveUser.nickname,
       image: saveUser.image,
       phone: saveUser.phone,
       wallet: saveUser.wallet,
-    };
+      createdAt: saveUser.createdAt,
+      updatedAt: saveUser.createdAt
+    });
   }
 
   // 로그인

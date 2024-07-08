@@ -8,19 +8,19 @@ import { LoginDto } from './dto/login.dto';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   // 회원가입
-  @Post('register')
+  @Post('sign-up')
   async register(@Body() resisterDto: ResisterDto) {
     const newUser = await this.userService.register(resisterDto.email, resisterDto.password, resisterDto.rePassword, resisterDto.nickname, resisterDto.image, resisterDto.phone);
     return newUser;
   }
 
   // 로그인
-  @Post('login')
+  @Post('sign-in')
   async login(@Body() loginDto: LoginDto) {
     return await this.userService.login(loginDto.email, loginDto.password);
   }
@@ -29,7 +29,7 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   @Get('me')
   getEmail(@UserInfo() user: User) {
-    return user;
+    return ({ message: "프로필 조회에 성공했습니다.", user});
   }
 
   // 프로필 수정
@@ -46,7 +46,7 @@ export class UserController {
       patchData.image,
       patchData.phone,
     )
-    return patchedUser;
+    return ({ message: "프로필 수정에 성공했습니다.", patchedUser});
   }
 
 }
